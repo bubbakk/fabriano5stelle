@@ -58,7 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <style is="custom-style" include="shared-styles"></style>
   <!-- <link rel="import" href="styles/sky.html"> -->
 
-  <!-- <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script> -->
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 
 </head>
 
@@ -155,41 +155,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <iron-icon icon="explore"></iron-icon>
                       <strong>Attività politica</strong>, eventi, contatti, atti e tutte le informazioni necessarie per <strong>partecipare attivamente</strong> nella gestione della tua città.</div>
                     <div class="card-actions">
-                      <paper-button>Vai al sito</paper-button>
+                      <paper-button>
+                        <a href="http://www.fabriano5stelle.it" target="_blank">Vai al sito</a>
+                      </paper-button>
                     </div>
                   </paper-card>
                 </div>
                 <br>
                 <div class="horizontal layout wrap">
-                  <paper-card heading="Nei social network" class="flex-5">
+                  <paper-card heading="Social network" class="flex-5">
                     <div class="card-content">
-                      <iron-icon icon="account-box"></iron-icon>
-                      Siamo presenti su molti social network. Seguici dove preferisci.
+                      Siamo presenti su diversi canali di comunicazione: social network, canali video e altro. Seguici dove preferisci.
                       <br>
                       <br>
                       <div class="list short" role="listbox">
+                        <!-- Facebook -->
                         <paper-item>
                           <paper-item-body two-line>
-                            <div><h4>Facebook</h4></div>
-                            <div secondary>Your status is visible to everyone</div>
+                            <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-32.png"></iron-image>
+                            <h4>Facebook</h4>
+                            <div secondary style="margin-top: 5px">Apri</div>
                           </paper-item-body>
-                          <iron-icon icon="warning"></iron-icon>
                         </paper-item>
                         <br>
+                        <!-- Twitter -->
                         <paper-item>
                           <paper-item-body two-line>
-                            <div><h4>Twitter</h4></div>
-                            <div secondary>Your status is visible to everyone</div>
+                            <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/twitter_circle_color-32.png"></iron-image>
+                            <h4>Twitter</h4>
+                            <div secondary style="margin-top: 5px">Apri</div>
                           </paper-item-body>
-                          <iron-icon icon="warning"></iron-icon>
                         </paper-item>
                         <br>
+                        <!-- Youtube -->
                         <paper-item>
                           <paper-item-body two-line>
-                            <div><h4>Youtube</h4></div>
-                            <div secondary>Your status is visible to everyone</div>
+                            <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/youtube_circle_color-32.png"></iron-image>
+                            <h4>YouTube</h4>
+                            <div secondary style="margin-top: 5px"><a href="https://www.youtube.com/user/fabriano5stelle" target:"_blank">Apri</a></div>
                           </paper-item-body>
-                          <iron-icon icon="warning"></iron-icon>
                         </paper-item>
                       </div>
                     </div>
@@ -235,6 +239,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
+  <script>
+    /*
+    var myDataRef = new Firebase('https://fabriano5stelle.firebaseio.com/Segnalazioni');
+    myDataRef.push({name: 'Andrea', text: 'testo'});
+    */    
+  </script>
   <!-- endbuild-->
 </body>
 

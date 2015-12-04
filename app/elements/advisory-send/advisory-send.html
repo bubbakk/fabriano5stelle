@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="advisory-send">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-meta id="meta" key="myinfo" on-change></iron-meta>
+    <paper-textarea label="ora ti aggiorno (MANUALE)" value="{{replyString}}"></paper-textarea>
+    <form is="iron-form" id="form" method="post" action="/form/handler">
+      <paper-input label="nome e cognome" required="true" value="{{advisory.name}}"></paper-input>
+      <gold-email-input label="e-mail" auto-validate="true" required value="{{advisory.email}}"></gold-email-input>
+      <paper-textarea label="testo della segnalazione" required="true" value="{{advisory.advice}}"></paper-textarea>
+      <br>
+      <br>
+      <paper-button on-click="submitForm" raised>Invia</paper-button>
+      <iron-ajax
+        id="xhr"
+        url="./get_data.php"
+        method="GET"
+        params={{advisory}}
+        handle-ad="json"
+        on-response="handleResponse"
+        debounce-duration="300"
+        ></iron-ajax>
+
+    </form>
+
+    <!--
+    <h2 class="page-title"><span>{{greeting}}</span></h2>
+    <span class="paper-font-body2">Update text to change the greeting.</span>
+    <!-- Listens for "input" event and sets greeting to <input>.value -- >
+    <input class="paper-font-body2" value="{{greeting::input}}">
+    -->
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      
+      Polymer({
+        is: 'advisory-send',
+        properties: {
+          advisory: {
+            notify: true,
+            value: function(){
+              return {
+                name: '',
+                email: '',
+                advice: ''
+              };
+            }
+          },
+          replyString: {
+            notify: true,
+            value: ''
+          }
+        },
+        handleResponse: function(){
+          page('#!/advisory-thanks/' + this.advisory.name);
+        },
+        submitForm: function(){
+          //this.$.xhr.generateRequest();
+          this.replyString = JSON.stringify(this.$.meta.byKey('myinfo'));
+          console.log(this.$.meta.byKey('myinfo'));
+        }
+      });
+    })();
+  </script>
+
+</dom-module>

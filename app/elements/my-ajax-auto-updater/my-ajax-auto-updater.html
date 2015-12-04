@@ -1,0 +1,50 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="my-ajax-auto-updater">
+  <template>
+    <iron-meta id="meta" key="myinfo"></iron-meta>
+    <iron-ajax
+        id="xhr"
+        url="http://localhost/polymer_2nd_test/second_test/get_random_data.php"
+        method="GET"
+        handle-as="json"
+        on-response="handleResponse"
+        debounce-duration="300">
+    </iron-ajax>
+    <paper-textarea label="ora ti aggiorno (AUTOMATICO)" value="{{replyString}}"></paper-textarea>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+      
+      Polymer({
+        is: 'my-ajax-auto-updater',
+        properties: {
+          replyString: {
+            notify: true,
+            value: ''
+          }
+        },
+        listeners: {
+        },
+        handleResponse: function(e){
+          // set property
+          this.replyString = JSON.stringify(e.detail.response);
+          // manually set value
+          this.$.meta.value = e.detail.response;
+        },
+        updateValues: function(){
+          this.$.xhr.generateRequest();
+        },
+        attached: function(){
+          console.log(this.localName + '#' + this.id + ' was created');
+          this.updateValues();
+          var _this = this;
+          setInterval(function(){
+            _this.updateValues();
+          }, 5000);
+        }
+      });
+    })();
+  </script>
+</dom-module>

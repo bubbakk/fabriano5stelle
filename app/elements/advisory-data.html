@@ -1,0 +1,19 @@
+<dom-module id="advisory-data">
+  <script>
+    Polymer({
+      is: 'advisory-data',
+      properties: {
+        advisory: {
+          notify: true,
+          value: function(){
+            return {
+              name: 'Andrea Ferroni',
+              email: 'andrea.ferroni@spesonline.com',
+              advice: 'lorem ipsum ...'
+            };
+          }
+        }
+      }      
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="lista-contatti">
+
+  <style>
+  </style>
+
+  <template>
+    <paper-material elevation="0">
+      <div class="horizontal layout wrap">
+        <paper-card heading="Sito Internet" class="flex-3">
+          <div class="card-content">
+            <iron-icon icon="explore"></iron-icon>
+            <strong>Attività politica</strong>, eventi, contatti, atti e tutte le informazioni necessarie per <strong>partecipare attivamente</strong> nella gestione della tua città.</div>
+          <div class="card-actions">
+            <paper-button>
+              <a href="http://www.fabriano5stelle.it" target="_blank">Vai al sito</a>
+            </paper-button>
+          </div>
+        </paper-card>
+      </div>
+      <br>
+      <div class="horizontal layout wrap">
+        <paper-card heading="Social network" class="flex-5">
+          <div class="card-content">
+            Siamo presenti su diversi canali di comunicazione: social network, canali video e altro. Seguici dove preferisci.
+            <br>
+            <br>
+            <div class="list short" role="listbox">
+              <!-- Facebook -->
+              <paper-item>
+                <paper-item-body two-line>
+                  <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-32.png"></iron-image>
+                  <h4>Facebook</h4>
+                  <div secondary style="margin-top: 5px">Apri</div>
+                </paper-item-body>
+              </paper-item>
+              <br>
+              <!-- Twitter -->
+              <paper-item>
+                <paper-item-body two-line>
+                  <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/twitter_circle_color-32.png"></iron-image>
+                  <h4>Twitter</h4>
+                  <div secondary style="margin-top: 5px">Apri</div>
+                </paper-item-body>
+              </paper-item>
+              <br>
+              <!-- Youtube -->
+              <paper-item>
+                <paper-item-body two-line>
+                  <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/youtube_circle_color-32.png"></iron-image>
+                  <h4>YouTube</h4>
+                  <div secondary style="margin-top: 5px"><a href="https://www.youtube.com/user/fabriano5stelle" target:"_blank">Apri</a></div>
+                </paper-item-body>
+              </paper-item>
+            </div>
+          </div>
+        </paper-card>
+      </div>
+    </paper-material>
+  </template>
+
+  <script>
+    (function(){
+      'use strict';
+      
+      Polymer({
+        is: 'lista-contatti'
+      });
+      
+    })();
+  </script>
+  
+</dom-module>

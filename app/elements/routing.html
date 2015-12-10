@@ -31,6 +31,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route = 'segnalazioni';
     });
 
+    page('/giornalino', scrollToTop, function() {
+      app.route = 'giornalino';
+    });
+
     page('/segnalazioni-thanks/:name', function(data) {
       app.route = 'segnalazioni-thanks';
       app.params = data.params;

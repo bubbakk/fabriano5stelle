@@ -81,12 +81,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <iron-icon icon="today"></iron-icon>
             <span>Appuntamenti</span>
           </a>
-
-          <a data-route="segnalazioni" href="/segnalazioni" on-click="onDataRouteClick">
-            <iron-icon icon="announcement"></iron-icon>
-            <span>Segnalazioni</span>
+<!--
+          <a data-route="giornalino" href="/giornalino" on-click="onDataRouteClick">
+            <iron-icon icon="subject"></iron-icon>
+            <span>Notizie</span>
           </a>
-          
+-->
           <a data-route="contatti" href="/contatti" on-click="onDataRouteClick">
             <iron-icon icon="mail"></iron-icon>
             <span>Contatti</span>
@@ -115,7 +115,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <!-- Application name -->
           <div class="middle middle-container center horizontal layout">
-            <div class="app-name">Polymer Starter Kit</div>
+            <div class="app-name">Fabriano 5 Stelle - [webapp]</div>
           </div>
 
           <!-- Application sub title -->
@@ -130,11 +130,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
             <section data-route="appuntamenti">
-              <h1 id="license">Appuntamenti</h1>
+              <h1 id="license">I prossimi appuntamenti</h1>
+              <lista-appuntamenti></lista-appuntamenti>
             </section>
 
             <section data-route="segnalazioni">
               <h1 id="license">Segnalazioni</h1>
+            </section>
+
+            <section data-route="giornalino">
+              <h1 id="license">Fabriano in Movimento</h1>
+              <p>Ultimo numero pubblicato del giornalino di informazione dell'attività, sia nazionale che sul territorio, a realizzato dal nostro gruppo.</p>
             </section>
 
             <section data-route="segnalazioni-thanks">
@@ -148,69 +154,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </section>
 
             <section data-route="contatti">
-              <paper-material elevation="0">
-                <div class="horizontal layout wrap">
-                  <paper-card heading="Sito Internet" class="flex-3">
-                    <div class="card-content">
-                      <iron-icon icon="explore"></iron-icon>
-                      <strong>Attività politica</strong>, eventi, contatti, atti e tutte le informazioni necessarie per <strong>partecipare attivamente</strong> nella gestione della tua città.</div>
-                    <div class="card-actions">
-                      <paper-button>
-                        <a href="http://www.fabriano5stelle.it" target="_blank">Vai al sito</a>
-                      </paper-button>
-                    </div>
-                  </paper-card>
-                </div>
-                <br>
-                <div class="horizontal layout wrap">
-                  <paper-card heading="Social network" class="flex-5">
-                    <div class="card-content">
-                      Siamo presenti su diversi canali di comunicazione: social network, canali video e altro. Seguici dove preferisci.
-                      <br>
-                      <br>
-                      <div class="list short" role="listbox">
-                        <!-- Facebook -->
-                        <paper-item>
-                          <paper-item-body two-line>
-                            <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-32.png"></iron-image>
-                            <h4>Facebook</h4>
-                            <div secondary style="margin-top: 5px">Apri</div>
-                          </paper-item-body>
-                        </paper-item>
-                        <br>
-                        <!-- Twitter -->
-                        <paper-item>
-                          <paper-item-body two-line>
-                            <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/twitter_circle_color-32.png"></iron-image>
-                            <h4>Twitter</h4>
-                            <div secondary style="margin-top: 5px">Apri</div>
-                          </paper-item-body>
-                        </paper-item>
-                        <br>
-                        <!-- Youtube -->
-                        <paper-item>
-                          <paper-item-body two-line>
-                            <iron-image style="float: left;" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/youtube_circle_color-32.png"></iron-image>
-                            <h4>YouTube</h4>
-                            <div secondary style="margin-top: 5px"><a href="https://www.youtube.com/user/fabriano5stelle" target:"_blank">Apri</a></div>
-                          </paper-item-body>
-                        </paper-item>
-                      </div>
-                    </div>
-                  </paper-card>
-                </div>
-              </paper-material>
+              <h1 id="license">Contatti</h1>
+              <lista-contatti></lista-contatti>
             </section>
 
             <section data-route="about">
                 <h1>About</h1>
                 <paper-material elevation="1">
                   <h3>Software info</h3>
-                  <p><strong>Versione</strong>: 0.2</p>
+                  <p><strong>Versione</strong>: 0.3</p>
                   <p><strong>Sviluppatori</strong>: potete scaricare e, se volete, contribuire al software accendendo al
                   repository di <a href="https://github.com/bubbakk/fabriano5stelle">GitHub</a>.</p>
                   <p><strong>Progretto originale</strong>: <i>bubbakk</i> per il <i>Movimento 5 Stelle di Fabriano</i></p>
                 </paper-material>
+                <!--
+                <paper-material elevation="1">
+                  <h3>Proponi miglioria a questa webapp</h3>
+                  <p>...chissà che non venga realizzata!</p>
+                  <paper-input type="text" label="Tuo nome" required="true"></paper-input>
+                  <paper-textarea type="text" label="Proposta" required="true"></paper-textarea>
+                  <br>
+                  <paper-button elevation="1">Invia</paper-button>
+                </paper-material>
+                -->
             </section>
             
           </iron-pages>
@@ -241,9 +207,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="scripts/app.js"></script>
   <script>
     /*
-    var myDataRef = new Firebase('https://fabriano5stelle.firebaseio.com/Segnalazioni');
-    myDataRef.push({name: 'Andrea', text: 'testo'});
-    */    
+    var myDataRef = new Firebase('https://fabriano5stelle.firebaseio.com/About/ProponiMiglioria');
+    myDataRef.push({testo: "testo miglioria", nome: "guido"});
+    */
   </script>
   <!-- endbuild-->
 </body>

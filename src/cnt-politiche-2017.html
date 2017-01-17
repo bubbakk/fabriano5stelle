@@ -1,0 +1,83 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="cnt-politiche-2017">
+  <template>
+    <style include="iron-flex"></style>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        outline: none;
+      }
+
+      paper-card {
+        max-width: 400px;
+        min-width: 300px;
+        margin: 10px;
+        @apply(--layout-flex);
+      }
+
+      .card-header {
+        @apply(--paper-font-headline);
+      }
+
+      .card-light {
+        color: var(--paper-grey-600);
+        text-align: right;
+      }
+
+    </style>
+
+    <div class="layout horizontal wrap">
+
+      <template is="dom-repeat" items="{{candidati}}" as="candidato">
+    
+        <paper-card heading$="{{candidato.name}}" image="https://placeholdit.imgix.net/~text?txtsize=65&bg=ffc107&txtclr=000000&txt=%E2%98%BA&w=350&h=150" alt="Emmental">
+          <div class="card-content">
+            <div class="card-light">{{candidato.age}} anni</div>
+            <p><strong>Professione:</strong> {{candidato.job}}</p>
+          </div>
+          <div class="card-actions">
+            <paper-button>Share</paper-button>
+            <paper-button>Explore!</paper-button>
+          </div>
+        </paper-card>
+
+      </template>
+
+    </div>
+
+  </template>
+
+  <script>
+    'use strict';
+
+    Polymer({
+      
+      is: 'cnt-politiche-2017',
+
+      properties: {
+        candidati: {
+          type: Object,
+          readOnly: true,
+          value: CANDIDATI_2017
+        }
+      },
+
+      attached: function() {
+        console.log("politiche 2017");
+        //this.set('candidati', CANDIDATI_2017);
+      }
+    });
+  </script>
+</dom-module>

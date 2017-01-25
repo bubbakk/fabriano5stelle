@@ -1,6 +1,6 @@
 {
-  "name": "My App",
-  "short_name": "My App",
+  "name": "Movimento 5 Stelle - Fabriano",
+  "short_name": "M5S Fabriano",
   "start_url": "/?homescreen=1",
   "display": "standalone",
   "theme_color": "#3f51b5",

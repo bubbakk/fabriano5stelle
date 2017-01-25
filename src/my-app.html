@@ -24,7 +24,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="my-icons.html">
+
+<!-- external libraries -->
+<script type="text/javascript" src="/bower_components/moment/moment.js"></script>
+<script type="text/javascript" src="/bower_components/lodash/lodash.js"></script>
 
 <dom-module id="my-app">
   <template>
@@ -66,6 +71,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: bold;
       }
     </style>
+
+    <firebase-app
+      auth-domain="set yours"
+      database-url="set yours"
+      api-key="set yours">
+    </firebase-app>
 
     <app-location route="{{route}}"></app-location>
     <app-route
@@ -135,6 +146,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('cnt-' + page + '.html');
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
+        // close menu if not persistent
+        var appDrawer = this.$$("app-drawer");
+        if ( !appDrawer.persistent ) {
+          appDrawer.close();
+        }
       },
 
       _showPage404: function() {

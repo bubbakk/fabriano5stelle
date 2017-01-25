@@ -9,6 +9,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="cnt-politiche-2017">
@@ -36,20 +40,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-align: right;
       }
 
+      #immetticandidato {
+        max-width: 600px;
+        margin: 50px auto;
+        border-radius: 2px;
+        padding: 15px;
+      }
+
+      #immetticandidato paper-input {
+        padding: 5px;
+      }
+
     </style>
+
+    <firebase-app
+      auth-domain="movimento-5-stelle-fabriano.firebaseapp.com"
+      database-url="https://movimento-5-stelle-fabriano.firebaseio.com"
+      api-key="AIzaSyBvUIf1hfTlpYt6O5k-dLDTSOqc3Wf7bXI"
+      name="m5s"></firebase-app>
+    <firebase-query
+      id="query"
+      path="/candidati2017"
+      data="{{candidati}}"></firebase-query>
+
+    <div id="immetticandidato" class="text-content" >
+      <p>Immetti i dati dei candidati</p>
+      <div class="layout horizontal wrap">
+        <paper-input id="input_firstname" label="nome"></paper-input>
+        <paper-input id="input_lastname" label="cognome"></paper-input>
+       </div> 
+       <div class="layout horizontal wrap">
+        <paper-input id="input_job" label="impiego"></paper-input>
+        <paper-input id="input_birth_date" style="width: 200px;" size="10" maxLength="10" minLength="10" label="Data di nascita" placeholder="gg/mm/aaaa"></paper-input>
+      </div>
+      <paper-textarea id="input_story" label="motivazione" rows="3" size="80"></paper-textarea>
+      <paper-button raised on-tap="add">Salva</paper-button>
+    </div>
 
     <div class="layout horizontal wrap">
 
       <template is="dom-repeat" items="{{candidati}}" as="candidato">
     
-        <paper-card heading$="{{candidato.name}}" image="https://placeholdit.imgix.net/~text?txtsize=65&bg=ffc107&txtclr=000000&txt=%E2%98%BA&w=350&h=150" alt="Emmental">
+        <paper-card heading$="[[_computeFullName(candidato.content.firstname, candidato.content.lastname)]]" image="https://placeholdit.imgix.net/~text?txtsize=65&bg=ffc107&txtclr=000000&txt=%E2%98%BA&w=350&h=150" alt="Emmental">
           <div class="card-content">
-            <div class="card-light">{{candidato.age}} anni</div>
-            <p><strong>Professione:</strong> {{candidato.job}}</p>
+            <div class="card-light">[[_computeAge(candidato.content.birth-date)]] anni</div>
+            <p><strong>Professione:</strong> {{candidato.content.job}}</p>
           </div>
           <div class="card-actions">
-            <paper-button>Share</paper-button>
-            <paper-button>Explore!</paper-button>
+            <paper-button on-tap="remove" candidato="[[candidato]]">Cancella</paper-button>
           </div>
         </paper-card>
 
@@ -68,15 +106,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
         candidati: {
-          type: Object,
-          readOnly: true,
-          value: CANDIDATI_2017
+          type: Array
         }
       },
 
       attached: function() {
         console.log("politiche 2017");
-        //this.set('candidati', CANDIDATI_2017);
+      },
+
+      add: function() {
+        // verifica data (TODO)
+        if ( this.$.input_birth_date.value.length != 10 ) {
+          alert("formato data corretto: gg/mm/aaaa");
+          return false;
+        };
+        var day   = parseInt(this.$.input_birth_date.value.substring(0,2));
+        var month = parseInt(this.$.input_birth_date.value.substring(3,5)) - 1;
+        var year  = parseInt(this.$.input_birth_date.value.substring(6));
+        var checkDate = new Date(year, month, day);
+        if ( checkDate.getDate() !== day || checkDate.getMonth() !== month || checkDate.getFullYear() !== year ) {
+          alert("formato data corretto: gg/mm/aaaa");
+          return false;
+        }
+        this.$.query.ref.push({
+          content: {
+            "firstname": this.$.input_firstname.value.trim(),
+            "lastname":this.$.input_lastname.value.trim(),
+            "birth-date": this.$.input_birth_date.value,
+            "job": this.$.input_job.value,
+            "story": this.$.input_story.value === undefined ? "" : this.$.input_story.value,
+            "imageFile": this.$.input_firstname.value.trim().toLowerCase() + "_" + this.$.input_lastname.value.trim().toLowerCase() + ".png"
+          }
+        });
+        this.$.input_firstname.value = null;
+        this.$.input_lastname.value = null;
+        this.$.input_birth_date.value = null;
+        this.$.input_job.value = null;
+        this.$.input_story.value = null;
+      },
+
+      remove: function(e) {
+        var key = e.currentTarget.candidato.$key;
+        this.$.query.ref.child(key).remove();
+      },
+
+      _computeFullName: function(firstname, lastname) {
+        return firstname + " " + lastname;
+      },
+
+      _computeAge: function(date) {
+        var now = moment();
+        var birth_date = moment(date, 'DD-MM-YYYY');
+        return now.diff(birth_date, 'years');
       }
     });
   </script>
